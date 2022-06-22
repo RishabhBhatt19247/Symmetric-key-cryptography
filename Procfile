@@ -1,1 +1,1 @@
-web: gunicorn cipher.wsgi 
+web: waitress-serve --port=$PORT cipher.wsgi:application
