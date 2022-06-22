@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        background-color: white;
+      }
+      .main {
+        margin: auto;
+        width: 50%;
+        border: 3px solid black;
+        padding: 10px;
+        background-color: lightgrey;
+      }
+      .algo {
+        text-transform: uppercase;
+        padding: 0.8rem 1.2rem;
+        font-weight: bold;
+        margin-top: 10px;
+        margin-left: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    {% load static %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Symmetric Key Cryptography</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="{% url 'home' %}"
+            >Home<span class="sr-only">(current)</span></a
+          >
+          <a class="nav-item nav-link" href="{% url 'Ceaser' %}"
+            >Additive Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Multiplicative' %}"
+            >Multiplicative Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Affine' %}"
+            >Affine Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Autokey' %}"
+            >Autokey Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Vignere' %}"
+            >Vignere Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Playfair' %}"
+            >Playfair Cipher</a
+          >
+        </div>
+      </div>
+    </nav>
+    <br />
+    <div>
+      <h1
+        style="margin: 10px 40px 10px 40px; text-align: center"
+        class="display-5"
+      >
+        What is Symmetric key cryptography ?
+      </h1>
+      <p
+        style="
+          font-size: 22px;
+          margin: 10px 40px 10px 40px;
+          text-align: justify;
+        "
+      >
+        Symmetric key cryptography is any cryptographic algorithm that is based
+        on a shared key that is used to encrypt or decrypt text/cyphertext, in
+        contract to asymmetric key cryptography, where the encryption and
+        decryption keys are different.Symmetric encryption is generally more
+        efficient than asymmetric encryption and therefore preferred when large
+        amounts of data need to be exchanged.Establishing the shared key is
+        difficult using only symmetric encryption algorithms, so in many cases,
+        an asymmetric encryption is used to establish the shared key between two
+        parties.
+      </p>
+    </div>
+    <br />
+    <div>
+      <p
+        style="
+          font-size: 22px;
+          margin: 10px 40px 10px 40px;
+          text-align: justify;
+        "
+      >
+        some of the symmetric key cryptography algorithms are as follows :
+      </p>
+      <a class="algo nav-item nav-link" href="{% url 'Ceaser' %}"
+        >Additive Cipher</a
+      >
+      <a class="algo nav-item nav-link" href="{% url 'Multiplicative' %}"
+        >Multiplicative Cipher</a
+      >
+      <a class="algo nav-item nav-link" href="{% url 'Affine' %}"
+        >Affine Cipher</a
+      >
+      <a class="algo nav-item nav-link" href="{% url 'Autokey' %}"
+        >Autokey Cipher</a
+      >
+      <a class="algo nav-item nav-link" href="{% url 'Vignere' %}"
+        >Vignere Cipher</a
+      >
+      <a class="algo nav-item nav-link" href="{% url 'Playfair' %}"
+        >Playfair Cipher</a
+      >
+
+      <br /><br /><br />
+
+      <center><h5 style="color: red">Developed By : Rishabh Bhatt</h5></center>
+    </div>
+  </body>
+</html>

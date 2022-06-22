@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Multiplicative Cipher</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        background-color: white;
+      }
+      .main {
+        margin: auto;
+        width: 50%;
+        border: 3px solid black;
+        padding: 10px;
+        text-align: center;
+        background-color: lightgrey;
+      }
+      .text {
+        font-size: 22px;
+        margin: 10px 40px 10px 40px;
+        text-align: justify;
+      }
+      .text-center {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    {% load static %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Symmetric Key Cryptography</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'Ceaser' %}"
+            >Additive Cipher</a
+          >
+          <a class="nav-item nav-link active" href="{% url 'Multiplicative' %}"
+            >Multiplicative Cipher<span class="sr-only">(current)</span></a
+          >
+          <a class="nav-item nav-link" href="{% url 'Affine' %}"
+            >Affine Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Autokey' %}"
+            >Autokey Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Vignere' %}"
+            >Vignere Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Playfair' %}"
+            >Playfair Cipher</a
+          >
+        </div>
+      </div>
+    </nav>
+    <br />
+    <div>
+      <h1
+        style="margin: 10px 40px 10px 40px; text-align: center"
+        class="display-5"
+      >
+        What is Multiplicative Cipher?
+      </h1>
+      <p class="text">
+        Multiplicative cipher needs Plaintext/Ciphertext and One Key.
+      </p>
+      <p class="text">
+        To convert plaintext into ciphertext we just have to multiply character
+        and key and take modulus by 26. for example, if we have key '3' and
+        plaintext character 'B' then the ciphertext character will be
+        1(B)*3(key)%26 = 3(C).
+      </p>
+      <p
+        class="text-center text"
+        style="
+          background-color: #696969;
+          margin-left: 500px;
+          margin-right: 500px;
+          color: black;
+        "
+      >
+        E<sub>n</sub>(X)=(X*key) mod 26
+      </p>
+      <p class="text">
+        To convert ciphertext into plaintext we have to find multiplicative
+        inverse of key using extended euclidean algo and then multiply it with
+        character and take modulus by 26. for example, if we have key '3' and
+        cipher character 'C'.
+      </p>
+      <div style="margin: 10px 40px 10px 40px">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th colspan="7" style="text-align: center">
+                <b>first must check key is Co-Prime to the 26.</b>
+              </th>
+            </tr>
+            <tr>
+              <th scope="col">Quotient</th>
+              <th scope="col">R1</th>
+              <th scope="col">R2</th>
+              <th scope="col">Reminder</th>
+              <th scope="col">t1</th>
+              <th scope="col">t2</th>
+              <th scope="col">t = t1-(Q*t2)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>8</td>
+              <td>26(Z<sub>26</sub>)</td>
+              <td>3(key)</td>
+              <td>2</td>
+              <td>0(initial)</td>
+              <td>1(initial)</td>
+              <td>(0-(8*1))=-8</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>3 (R2 from above Row)</td>
+              <td>2 (R from above Row)</td>
+              <td>1</td>
+              <td>1 (T2 from above Row)</td>
+              <td>-8 (T from above Row)</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>2</td>
+              <td>1</td>
+              <td>0</td>
+              <td>-8</td>
+              <td>9</td>
+              <td>-26</td>
+            </tr>
+            <tr>
+              <td colspan="7" style="text-align: center">
+                Multiplicative Inverse of key = 9 mod 26 = <b>9</b>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text">
+        Now we multiply the key inverse and ciphertext character (9(key inverse)
+        * 3(C)) mod 26 = 1(B) .
+      </p>
+      <p
+        class="text-center text"
+        style="
+          background-color: #696969;
+          margin-left: 500px;
+          margin-right: 500px;
+          color: black;
+        "
+      >
+        E<sub>n</sub>(X)=(X*key_inverse) mod 26
+      </p>
+    </div>
+    <br />
+    <div class="main">
+      <h1 class="form">Multiplicative Cipher</h1>
+      <br />
+      <form
+        class="form"
+        method="POST"
+        action="{% url 'multiplicative' %}"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="div">
+          <label for="Data">Data :</label><br />
+          <input type="text" id="Data" name="Data" value="Hey there" /><br />
+          <label for="Key">Key :</label><br />
+          <input type="text" id="Key" name="Key" value="3" />
+        </div>
+        <br />
+        <br />
+        <input class="button" type="submit" name="decrypt" value="encrypt" />
+        <input class="button" type="submit" name="encrypt" value="decrypt" />
+        <br />
+        <br />
+      </form>
+      <h2>{{ data }}</h2>
+    </div>
+    <br />
+  </body>
+</html>

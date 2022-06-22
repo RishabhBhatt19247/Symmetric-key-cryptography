@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Playfair Cipher</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        background-color: white;
+      }
+      .main {
+        margin: auto;
+        width: 50%;
+        border: 3px solid black;
+        padding: 10px;
+        text-align: center;
+        background-color: lightgrey;
+      }
+      .text {
+        font-size: 22px;
+        margin: 10px 40px 10px 40px;
+        text-align: justify;
+      }
+      .text-center {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    {% load static %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Symmetric Key Cryptography</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'Ceaser' %}"
+            >Additive Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Multiplicative' %}"
+            >Multiplicative Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Affine' %}"
+            >Affine Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Autokey' %}"
+            >Autokey Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Vignere' %}"
+            >Vignere Cipher</a
+          >
+          <a class="nav-item nav-link active" href="{% url 'Playfair' %}"
+            >Playfair Cipher<span class="sr-only">(current)</span></a
+          >
+        </div>
+      </div>
+    </nav>
+    <br />
+    <div>
+      <h1
+        style="margin: 10px 40px 10px 40px; text-align: center"
+        class="display-5"
+      >
+        What is Playfair Cipher?
+      </h1>
+      <p class="text">
+        The Playfair cipher uses a 5 by 5 table containing a key word or phrase.
+        Memorization of the keyword and 4 simple rules was all that was required
+        to create the 5 by 5 table and use the cipher.
+      </p>
+
+      <p class="text">
+        To generate the key table, one would first fill in the spaces in the
+        table (a modified Polybius square) with the letters of the keyword
+        (dropping any duplicate letters), then fill the remaining spaces with
+        the rest of the letters of the alphabet in order (usually omitting "J"
+        or "Q" to reduce the alphabet to fit; other versions put both "I" and
+        "J" in the same space). The key can be written in the top rows of the
+        table, from left to right, or in some other pattern, such as a spiral
+        beginning in the upper-left-hand corner and ending in the center. The
+        keyword together with the conventions for filling in the 5 by 5 table
+        constitute the cipher key.
+      </p>
+
+      <p class="text">
+        To encrypt a message, one would break the message into digrams (groups
+        of 2 letters) such that, for example, "HelloWorld" becomes "HE LL OW OR
+        LD". These digrams will be substituted using the key table. Since
+        encryption requires pairs of letters, messages with an odd number of
+        characters usually append an uncommon letter, such as "X", to complete
+        the final digram. The two letters of the digram are considered opposite
+        corners of a rectangle in the key table. To perform the substitution,
+        apply the following 4 rules, in order, to each pair of letters in the
+        plaintext:
+      </p>
+
+      <ol class="text" style="font-size: 16px; font-weight: bold">
+        <li>
+          If both letters are the same (or only one letter is left), add an "X"
+          after the first letter. Encrypt the new pair and continue. Some
+          variants of Playfair use "Q" instead of "X", but any letter, itself
+          uncommon as a repeated pair, will do.
+        </li>
+        <li>
+          If the letters appear on the same row of your table, replace them with
+          the letters to their immediate right respectively (wrapping around to
+          the left side of the row if a letter in the original pair was on the
+          right side of the row).
+        </li>
+        <li>
+          If the letters appear on the same column of your table, replace them
+          with the letters immediately below respectively (wrapping around to
+          the top side of the column if a letter in the original pair was on the
+          bottom side of the column).
+        </li>
+        <li>
+          If the letters are not on the same row or column, replace them with
+          the letters on the same row respectively but at the other pair of
+          corners of the rectangle defined by the original pair. The order is
+          important – the first letter of the encrypted pair is the one that
+          lies on the same row as the first letter of the plaintext pair.
+        </li>
+      </ol>
+      <p class="text" style="font-weight: 700">For Example</p>
+      <p class="text" style="font-size: 18px">
+        Using "playfair example" as the key (assuming that I and J are
+        interchangeable), the table becomes
+      </p>
+      <div style="margin: 10px 500px 10px 550px; text-align: center">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th colspan="5" style="text-align: center">
+                Subscripted character are ommited.
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>P</td>
+              <td>L</td>
+              <td>A</td>
+              <td>Y</td>
+              <td>F <sub>A</sub></td>
+            </tr>
+            <tr>
+              <td>I</td>
+              <td>R</td>
+              <td>E</td>
+              <td>X <sub>A</sub></td>
+              <td>M <sub>PLE A</sub></td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>C</td>
+              <td>D <sub>EF</sub></td>
+              <td>G</td>
+              <td>H <sub>I=J</sub></td>
+            </tr>
+            <tr>
+              <td>K <sub>LM</sub></td>
+              <td>N</td>
+              <td>O <sub>P</sub></td>
+              <td>Q <sub>R</sub></td>
+              <td>S</td>
+            </tr>
+            <tr>
+              <td>T</td>
+              <td>U</td>
+              <td>V</td>
+              <td>W <sub>XY</sub></td>
+              <td>Z</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <pre class="text">
+Encrypting the message "Hide the gold in the tree stump" (note the null "X" used to separate the repeated "E"s) :
+                HI DE TH EG OL DI NT HE TR E<b>X</b> ES TU MP</pre
+      >
+      <p class="text">
+        To decrypt, use the inverse (opposite) of the last 3 rules, and the
+        first as-is (dropping any extra "X"s or "Q"s that do not make sense in
+        the final message when finished). There are several minor variations of
+        the original Playfair cipher.
+      </p>
+    </div>
+    <br />
+    <div class="main">
+      <h1 class="form">Playfair Cipher</h1>
+      <br />
+      <form
+        class="form"
+        method="POST"
+        action="{% url 'playfair' %}"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="div">
+          <label for="Data">Data :</label><br />
+          <input type="text" id="Data" name="Data" value="Hey there" /><br />
+          <label for="Key">Key :</label><br />
+          <input type="text" id="Key" name="Key" value="abc" />
+        </div>
+        <br />
+        <br />
+        <input class="button" type="submit" name="decrypt" value="encrypt" />
+        <input class="button" type="submit" name="encrypt" value="decrypt" />
+        <br />
+        <br />
+      </form>
+      <h2>{{ data1 }}</h2>
+      <h2>{{ data }}</h2>
+    </div>
+    <br />
+  </body>
+</html>

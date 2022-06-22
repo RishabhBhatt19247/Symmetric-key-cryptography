@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Autokey Cipher</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        background-color: white;
+      }
+      .main {
+        margin: auto;
+        width: 50%;
+        border: 3px solid black;
+        padding: 10px;
+        text-align: center;
+        background-color: lightgrey;
+      }
+      .text {
+        font-size: 22px;
+        margin: 10px 40px 10px 40px;
+        text-align: justify;
+      }
+      .text-center {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    {% load static %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Symmetric Key Cryptography</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'Ceaser' %}"
+            >Additive Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Multiplicative' %}"
+            >Multiplicative Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Affine' %}"
+            >Affine Cipher</a
+          >
+          <a class="nav-item nav-link active" href="{% url 'Autokey' %}"
+            >Autokey Cipher<span class="sr-only">(current)</span></a
+          >
+          <a class="nav-item nav-link" href="{% url 'Vignere' %}"
+            >Vignere Cipher</a
+          >
+          <a class="nav-item nav-link" href="{% url 'Playfair' %}"
+            >Playfair Cipher</a
+          >
+        </div>
+      </div>
+    </nav>
+    <br />
+    <div>
+      <h1
+        style="margin: 10px 40px 10px 40px; text-align: center"
+        class="display-5"
+      >
+        What is Autokey Cipher?
+      </h1>
+      <p class="text">
+        Autokey cipher needs Plaintext/Ciphertext and One Key. But in this
+        Cipher the Key will be only for the first character and for the second
+        character the key will be the first character and goes on...
+      </p>
+      <p class="text">
+        So the key stream will be like ( key,first character,second
+        character,...,(n-1) character) and character stream will be like (first
+        character,second character,...,(n) character)
+      </p>
+      <p class="text">
+        To convert plaintext into ciphertext we just have to add character
+        stream and key stream and take modulus by 26. for example, if we have
+        key '3' and plaintext 'AB' then the key stream is {3,0} and plaintext
+        stream is {0,1}. Ciphertext stream will be like {(3+0)mod26,(0+1)mod26}
+        = {3,1} so the ciphertext = 'DB'.
+      </p>
+      <p
+        class="text text-center"
+        style="
+          background-color: #696969;
+          margin-left: 500px;
+          margin-right: 500px;
+          color: black;
+        "
+      >
+        E<sub>n</sub>(X)=(X<sub>n</sub>+key<sub>n</sub>) mod 26
+      </p>
+      <p class="text">
+        To convert ciphertext into plaintext we just have to substraction
+        Ciphertext stream and key stream and take modulus by 26. for example, if
+        we have key '3' and ciphertext character 'DB' then the Plaintext will be
+        {(3-3)mod26,(1-0)mod26} ={0,1} = 'AB'
+      </p>
+      <p
+        class="text text-center"
+        style="
+          background-color: #696969;
+          margin-left: 500px;
+          margin-right: 500px;
+          color: black;
+        "
+      >
+        E<sub>n</sub>(X)=(X<sub>n</sub>-key<sub>n</sub>) mod 26
+      </p>
+    </div>
+    <br />
+    <div class="main">
+      <h1 class="form">Autokey Cipher</h1>
+      <br />
+      <form
+        class="form"
+        method="POST"
+        action="{% url 'autokey' %}"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="div">
+          <label for="Data">Data :</label><br />
+          <input type="text" id="Data" name="Data" value="Hey there" /><br />
+          <label for="Key">Key :</label><br />
+          <input type="text" id="Key" name="Key" value="3" />
+        </div>
+        <br />
+        <br />
+        <input class="button" type="submit" name="decrypt" value="encrypt" />
+        <input class="button" type="submit" name="encrypt" value="decrypt" />
+        <br />
+        <br />
+      </form>
+      <h2>{{ data }}</h2>
+    </div>
+    <br />
+  </body>
+</html>
