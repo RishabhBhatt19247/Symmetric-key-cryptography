@@ -115,7 +115,7 @@
       <p class="text">
         To convert ciphertext into plaintext first we have to find
         multiplicative inverse of key1 using extended euclidean algo and then
-        multiply it with character and key2 substraction and take modulus by 26.
+        multiply it with character and key2 subtraction and take modulus by 26.
         for example, we have key1 '15' key2 '20' and cipher character 'U'.
       </p>
       <div style="margin: 10px 40px 10px 40px">
@@ -191,8 +191,8 @@
         </table>
       </div>
       <p class="text">
-        Now we multiply the key inverse with substraction of ciphertext
-        character and key2 => ((20(U)-20(key2))*7 (key inverse)) mod 26 = 0(A) .
+        Now we multiply the key inverse with subtraction of ciphertext character
+        and key2 => ((20(U)-20(key2)) * 1/15(key inverse)) mod 26 = 0(A) .
       </p>
       <p
         class="text-center text"
@@ -219,7 +219,12 @@
         {% csrf_token %}
         <div class="div">
           <label for="Data">Data :</label><br />
-          <input type="text" id="Data" name="Data" value="Hey there" /><br />
+          <input
+            type="text"
+            id="Data"
+            name="Data"
+            value="Write your text here"
+          /><br />
           <label for="Key1">Key1 :</label><br />
           <input type="text" id="Key1" name="Key1" value="3" /><br />
           <label for="Key2">Key2 :</label><br />
