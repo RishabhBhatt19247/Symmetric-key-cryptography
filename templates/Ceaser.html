@@ -102,7 +102,7 @@
         To convert plaintext into ciphertext we just have to add character and
         key and take modulus by 26. for example, if we have key '3' and
         plaintext character 'A' then the ciphertext character will be
-        0(A)+3(key)%26 = 3(C).
+        0(A)+3(key)%26 = 3(D).
       </p>
       <p
         class="text text-center"
@@ -116,10 +116,10 @@
         E<sub>n</sub>(X)=(X+key) mod 26
       </p>
       <p class="text">
-        To convert ciphertext into plaintext we just have to substraction
+        To convert ciphertext into plaintext we just have to subtraction
         character and key and take modulus by 26. for example, if we have key
-        '3' and plaintext character 'C' then the ciphertext character will be
-        3(C)-3(key)%26 = 0(A).
+        '3' and plaintext character 'D' then the ciphertext character will be
+        3(D)-3(key)%26 = 0(A).
       </p>
       <p
         class="text text-center"
@@ -146,7 +146,12 @@
         {% csrf_token %}
         <div class="div">
           <label for="Data">Data :</label><br />
-          <input type="text" id="Data" name="Data" value="Hey there" /><br />
+          <input
+            type="text"
+            id="Data"
+            name="Data"
+            value="Write your text here"
+          /><br />
           <label for="Key">Key :</label><br />
           <input type="text" id="Key" name="Key" value="3" />
         </div>
