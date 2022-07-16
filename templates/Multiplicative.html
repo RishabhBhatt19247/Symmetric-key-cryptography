@@ -101,7 +101,7 @@
         To convert plaintext into ciphertext we just have to multiply character
         and key and take modulus by 26. for example, if we have key '3' and
         plaintext character 'B' then the ciphertext character will be
-        1(B)*3(key)%26 = 3(C).
+        1(B)*3(key)%26 = 3(D).
       </p>
       <p
         class="text-center text"
@@ -118,7 +118,7 @@
         To convert ciphertext into plaintext we have to find multiplicative
         inverse of key using extended euclidean algo and then multiply it with
         character and take modulus by 26. for example, if we have key '3' and
-        cipher character 'C'.
+        cipher character 'D'.
       </p>
       <div style="margin: 10px 40px 10px 40px">
         <table class="table table-dark">
@@ -175,8 +175,8 @@
         </table>
       </div>
       <p class="text">
-        Now we multiply the key inverse and ciphertext character (9(key inverse)
-        * 3(C)) mod 26 = 1(B) .
+        Now we multiply the key inverse and ciphertext character (1/3(key
+        inverse) * 3(D)) mod 26 = 1(B) .
       </p>
       <p
         class="text-center text"
@@ -203,7 +203,12 @@
         {% csrf_token %}
         <div class="div">
           <label for="Data">Data :</label><br />
-          <input type="text" id="Data" name="Data" value="Hey there" /><br />
+          <input
+            type="text"
+            id="Data"
+            name="Data"
+            value="Write your text here"
+          /><br />
           <label for="Key">Key :</label><br />
           <input type="text" id="Key" name="Key" value="3" />
         </div>
